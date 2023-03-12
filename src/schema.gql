@@ -1,0 +1,93 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input AddMessageToRoomDto {
+  avatar: String
+  content: String!
+  roomName: String!
+  sender: String!
+}
+
+input CreateRoomDto {
+  members: [String!]!
+  roomName: String
+  type: String!
+}
+
+input CreateUserDto {
+  email: String!
+  fullname: String!
+  password: String!
+  username: String!
+}
+
+type MessageModel {
+  _id: String
+  avatar: String
+  content: String
+  sender: String
+}
+
+type Mutation {
+  addConnectUser(_id: String!, connectId: String!): UserModel
+  addMessageToRoom(_id: String!, addMessageToRoomDto: AddMessageToRoomDto!): RoomModel
+  createRoom(_id: String!, createRoomDto: CreateRoomDto!): RoomModel
+  createUser(createUserDto: CreateUserDto!): UserModel
+  deleteConnectUser(_id: String!, connectUserId: String!): UserModel
+  deleteUser(_id: String!): Boolean
+  forgotPassword(email: String, newPassword: String!, otpCodeReceive: String!, username: String): Boolean
+  sendEmailOtpCode(sendEmailOtpCodeDto: SendEmailOtpCodeDto!): Boolean
+  updateUser(_id: String!, updateUserDto: UpdateUserDto!): UserModel
+  verifyEmail(_id: String!, otpCodeReceive: String!): Boolean
+}
+
+type Query {
+  findConnectUsers(_id: String!): [UserModel!]
+  findMessageById(_id: String!, messageId: String!): MessageModel
+  findRoomById(_id: String!): RoomModel
+  findRoomByName(roomName: String!): RoomModel
+  findUserById(_id: String!): UserModel
+  findUserByUsernameOrEmail(_id: String!, email: String, username: String): UserModel
+  getListRooms(_id: String!, listRoomId: [String!]!): [RoomModel!]
+  getMessagesRoom(_id: String!, roomName: String!): [MessageModel!]
+  searchUser(searchUserRegex: String!): [UserModel!]
+  testGraph: String!
+}
+
+type RoomModel {
+  _id: String
+  members: [String!]
+  messages: [String!]
+  roomName: String
+  type: String
+}
+
+input SendEmailOtpCodeDto {
+  _id: String
+  email: String
+  username: String
+}
+
+input UpdateUserDto {
+  address: String
+  avatar: String
+  fullname: String
+  password: String
+}
+
+"""User schema graphql"""
+type UserModel {
+  _id: String
+  address: String
+  avatar: String
+  connectedRooms: [String!]
+  connectedUsers: [String!]
+  email: String
+  fullname: String
+  password: String
+  refreshToken: Boolean
+  role: String
+  username: String
+  verifyEmail: Boolean
+}
